@@ -32,6 +32,7 @@ if(isset($_POST['user_set'])){
     $hash = $row['pass_hash'];
     
     if(password_verify($pass_set, $hash)) {
+        $_SESSION['msg'] = "toast('Welcome back, $user_set!', 3000);";
         $_SESSION['login'] = true;
         header("Location: index.php");
         die();

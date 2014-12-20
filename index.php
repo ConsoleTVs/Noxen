@@ -23,7 +23,7 @@
         </div>
       </div>
       <br>
-a
+
       <!-- MUST INCLUDE THE FOOTER !-->
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js">
@@ -31,8 +31,9 @@ a
       <script type="text/javascript" src="js/materialize.js">
         
       </script>
+      
       <script>
-      <?php include 'inc/scripts.php' ?>a
+      <?php include 'inc/scripts.php' ?>
       </script>
   </body>
 </html>

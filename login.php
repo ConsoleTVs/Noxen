@@ -26,7 +26,7 @@ if(isset($_POST['user_set'])){
         echo "Connection failed: " . $e->getMessage();
     }
     
-    $statement = $conn->prepare("SELECT * FROM users WHERE username=:user_set");
+    $statement = $conn->prepare("SELECT * FROM admins WHERE username=:user_set");
     $statement->execute(array(':user_set' => $user_set));
     $row = $statement->fetch();
     $hash = $row['pass_hash'];

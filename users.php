@@ -91,11 +91,6 @@
                     ".$type_text."
                   </td>
                   <td>
-                    <a href='user.php?id=$u_id' class='btn-floating'>
-                      <i class='mdi-action-perm-identity'>
-                      </i>
-                    </a>
-                    
                     <a href='edit_user.php?id=$u_id' class='btn-floating'>
                       <i class='mdi-content-create'>
                       </i>

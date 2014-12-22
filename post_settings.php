@@ -1,5 +1,5 @@
-<?php include 'inc/core.php' ?>
 <?php include 'inc/settings.php' ?>
+<?php include 'inc/core.php' ?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>

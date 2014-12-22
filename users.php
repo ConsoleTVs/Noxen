@@ -1,5 +1,6 @@
-<?php include 'inc/core.php' ?>
 <?php include 'inc/settings.php' ?>
+<?php include 'inc/core.php' ?>
+
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -63,88 +64,51 @@
               </thead>
               
               <tbody>
-                <tr>
+                  
+                <?php
+    
+                    $statement = $conn->prepare("SELECT * FROM users");
+                    $statement->execute();
+                    while($row = $statement->fetch()){
+                        $username = $row['username'];
+                        $email = $row['email'];
+                        $type_plan = $row['type'];
+                        $u_id = $row['id'];
+                        
+                        $stmt = $conn->prepare("SELECT * FROM plan WHERE id=:type");
+                        $stmt->execute(array(':type' => $type_plan));
+                        $row = $stmt->fetch();
+                        $type_text = $row['plan'];
+                        
+                        echo "<tr>
                   <td>
-                    ConsoleTVs
+                    ".$username."
                   </td>
                   <td>
-                    ConsoleTVs@gmail.com
+                    ".$email."
                   </td>
                   <td>
-                    Standard
+                    ".$type_text."
                   </td>
                   <td>
-                    <a class="btn-floating">
-                      <i class="mdi-action-perm-identity">
+                    <a href='user.php?id=$u_id' class='btn-floating'>
+                      <i class='mdi-action-perm-identity'>
                       </i>
                     </a>
                     
-                    <a class="btn-floating">
-                      <i class="mdi-content-create">
+                    <a href='edit_user.php?id=$u_id' class='btn-floating'>
+                      <i class='mdi-content-create'>
                       </i>
                     </a>
                       
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
+                    <a href='delete_user.php?id=$u_id' class='btn-floating red'>
+                      <i class='mdi-action-delete'>
                       </i>
                     </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    ConsoleTVs
-                  </td>
-                  <td>
-                    ConsoleTVs@gmail.com
-                  </td>
-                  <td>
-                    Standard
-                  </td>
-                  <td>
-                     <a class="btn-floating">
-                      <i class="mdi-action-perm-identity">
-                      </i>
-                    </a>
-                    
-                    <a class="btn-floating">
-                      <i class="mdi-content-create">
-                      </i>
-                    </a>
-                      
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
-                      </i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    ConsoleTVs
-                  </td>
-                  <td>
-                    ConsoleTVs@gmail.com
-                  </td>
-                  <td>
-                    Standard
-                  </td>
-                  <td>
-                    <a class="btn-floating">
-                      <i class="mdi-action-perm-identity">
-                      </i>
-                    </a>
-                    
-                    <a class="btn-floating">
-                      <i class="mdi-content-create">
-                      </i>
-                    </a>
-                      
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
-                      </i>
-                    </a>
-                      
-                  </td>
-                </tr>
+                  </td>";
+                    }
+
+                ?>
               </tbody>
         </table>
         

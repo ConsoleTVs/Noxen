@@ -38,6 +38,7 @@ if(isset($_POST['user_set'])){
         die();
     } else {
         $login_msg = "Invalid account details";
+        $_SESSION['msg'] = "toast('Wrong details, try again!', 3000);";
         
     }
 }

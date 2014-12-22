@@ -1,5 +1,5 @@
-<?php include 'inc/core.php' ?>
 <?php include 'inc/settings.php' ?>
+<?php include 'inc/core.php' ?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -60,64 +60,34 @@
               </thead>
               
               <tbody>
-                <tr>
+                  
+                  <?php
+    
+                    $statement = $conn->prepare("SELECT * FROM subs");
+                    $statement->execute();
+                    while($row = $statement->fetch()){
+                        echo "<tr>
                   <td>
-                    ConsoleTVs@gmail.com
+                    ".$row['email']."
                   </td>
                     <td>
-                    12/10/215
+                    ".$row['date']."
                   </td>
                   <td>            
-                    <a class="btn-floating">
-                      <i class="mdi-communication-email">
+                    <a href='send.php?id=".$row['id']."' class='btn-floating'>
+                      <i class='mdi-communication-email'>
                       </i>
                     </a>
-                      
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
-                      </i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    ConsoleTVs@gmail.com
-                  </td>
-                    <td>
-                    12/10/215
-                  </td>
-                  <td>
-                    <a class="btn-floating">
-                      <i class="mdi-communication-email">
-                      </i>
-                    </a>
-                      
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
+                    <a href='delete_sub.php?id=".$row['id']."' class='btn-floating red'>
+                      <i class='mdi-action-delete'>
                       </i>
                     </a>
                   </td>
-                </tr>
-                <tr>
-                  <td>
-                    ConsoleTVs@gmail.com
-                  </td>
-                  <td>
-                    12/10/215
-                  </td>
-                  <td>
-                    <a class="btn-floating">
-                      <i class="mdi-communication-email">
-                      </i>
-                    </a>
-                      
-                    <a class="btn-floating red">
-                      <i class="mdi-action-delete">
-                      </i>
-                    </a>
-                      
-                  </td>
-                </tr>
+                </tr>";
+                    }
+
+                ?>
+
               </tbody>
         </table>
         

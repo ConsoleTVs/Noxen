@@ -1,4 +1,7 @@
 <?php
+
+require './lib/password.php';
+
 //WEBSITE INFORMATION
 $web_name = "Noxen";
 

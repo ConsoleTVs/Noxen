@@ -53,4 +53,13 @@
     overflow: hidden;
     position: fixed;
 }
+    
+#footer {
+    position: fixed;
+    bottom: 0;
+    top: 65px;
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+}
 </style>

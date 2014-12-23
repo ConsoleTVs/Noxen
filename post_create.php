@@ -1,5 +1,29 @@
+<?php 
+
+$mydate=getdate(date("U"));
+$date = "$mydate[month] $mydate[mday], $mydate[year]";
+
+?>
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
+<?php
+if(isset($_POST['editor1'])){
+    $header = $_POST['header'];
+    $text = $_POST['editor1'];
+    
+    $stmt = $conn->prepare("INSERT INTO posts (header, text, date)
+    VALUES (:header, :text, :date)");
+    $stmt->bindParam(':header', $header);
+    $stmt->bindParam(':text', $text);
+    $stmt->bindParam(':date', $date);
+
+    $stmt->execute();
+    
+    $_SESSION['msg'] = "toast('<span>Post Created</span><a class=\'btn-flat yellow-text\' href=\'#!\'>View Post<a>', 3000);";
+    header("Location: post_edit.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -32,12 +56,13 @@
               </i>
               Help
             </a><br><br>
+              <form method='POST'>
               <div class="input-field col s12">
-          <input id="username" type="text" required>
-          <label for="username">Post Title</label>
+          <input id="header" name='header' id='header' type="text" required>
+          <label for="header">Post Title</label>
         </div><br><br><br><br>
               <center>
-              <textarea class="ckeditor" name="editor1">Post Content...</textarea>
+              <textarea required class="ckeditor" name="editor1" id="editor1">Post Content...</textarea>
               </center>
               <br>
                
@@ -45,7 +70,7 @@
              <button class="btn waves-effect waves-light right" type="submit" name="action">Create Post
     <i class="mdi-content-send right"></i>
   </button>
-              
+              </form>
     </div>
     
   </div>

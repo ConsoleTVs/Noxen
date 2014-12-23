@@ -1,5 +1,11 @@
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
+<?php
+if(isset($_GET['id'])){
+    echo "EDIT MODE ENABLED";
+    die();
+}
+?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -32,15 +38,31 @@
               </i>
               Help
             </a><br>
-              <h1 class='light'>Test Post 1 <small style='font-size: 25px;'><i>18/12/2014</i></small></h1>
-              <h4 class='light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu est placerat, efficitur velit ut, rutrum lorem. Vestibulum rhoncus tellus a libero pulvinar, vitae vestibulum purus ultricies.</h4><a class="waves-effect waves-light btn right"><i class="mdi-editor-mode-edit left"></i>Edit</a>
-              <br>
-              <h1 class='light'>Test Post 2 <small style='font-size: 25px;'><i>14/12/2014</i></small></h1>
-              <h4 class='light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu est placerat, efficitur velit ut, rutrum lorem. Vestibulum rhoncus tellus a libero pulvinar, vitae vestibulum purus ultricies.</h4><a class="waves-effect waves-light btn right"><i class="mdi-editor-mode-edit left"></i>Edit</a>
-              <br>
-              <h1 class='light'>Test Post 3 <small style='font-size: 25px;'><i>11/12/2014</i></small></h1>
-              <h4 class='light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu est placerat, efficitur velit ut, rutrum lorem. Vestibulum rhoncus tellus a libero pulvinar, vitae vestibulum purus ultricies.</h4><a class="waves-effect waves-light btn right"><i class="mdi-editor-mode-edit left"></i>Edit</a>
-              <br>
+              <?php
+    
+                    $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC");
+                    $statement->execute();
+                    while($row = $statement->fetch()){
+                        
+                        $full_text = $row['text'];
+                        $text = str_replace("</p>","",$full_text);
+                        $min_text = substr($text,0,200).'...</p>';
+                        
+                        echo "<h1 class='light'>".$row['header']." <small style='font-size: 25px;'><i>".$row['date']."</i></small></h1>
+              <h4 class='light'>".$min_text."</h4> 
+              <div style='text-align:right'>
+              <a class='waves-effect waves-light btn' href='post_edit.php?id=".$row['id']."'><i class='mdi-editor-mode-edit left'></i>Edit</a> 
+              <a class='waves-effect waves-light btn red' href='delete_post.php?id=".$row['id']."'><i class='mdi-action-delete left'></i>Delete</a>
+              </div>
+              <br>";
+                    }
+
+                if(isset($text)){} else {
+                    echo "<h1 class='light'>There are no posts yet...</h1><a class='waves-effect waves-light btn right' href='post_create.php'><i class='mdi-editor-mode-edit left'></i>Create Post</a>";
+                }
+
+                ?>
+              
     </div>
     
   </div>

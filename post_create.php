@@ -19,8 +19,8 @@ if(isset($_POST['editor1'])){
 
     $stmt->execute();
     
-    $_SESSION['msg'] = "toast('<span>Post Created</span><a class=\'btn-flat yellow-text\' href=\'#!\'>View Post<a>', 3000);";
-    header("Location: post_edit.php");
+    $_SESSION['msg'] = "toast('<span>Post Created</span><a class=\'btn-flat yellow-text\' href=\'post_edit.php\'>View Post<a>', 5000);";
+    header("Location: post_create.php");
     die();
 }
 ?>
@@ -62,7 +62,7 @@ if(isset($_POST['editor1'])){
           <label for="header">Post Title</label>
         </div><br><br><br><br>
               <center>
-              <textarea required class="ckeditor" name="editor1" id="editor1">Post Content...</textarea>
+              <textarea required class="ckeditor" name="editor1" id="editor1"></textarea>
               </center>
               <br>
                

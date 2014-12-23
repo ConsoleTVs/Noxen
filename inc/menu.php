@@ -34,6 +34,11 @@
               </a>
             </li>
             <li>
+              <a href="settings.php">
+                Moderators
+              </a>
+            </li>
+            <li>
               <a href="logout.php">
                 Logout
               </a>

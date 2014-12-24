@@ -1,8 +1,6 @@
-Noxen
-=====
+# Noxen
 
-The modern Open Source CMS
------------
+#### The modern Open Source CMS
 
 Administrator Username: admin
 

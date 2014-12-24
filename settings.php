@@ -1,5 +1,32 @@
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
+<?php
+    $statement = $conn->prepare("SELECT * FROM settings WHERE id=1");
+    $statement->execute();
+    $row = $statement->fetch();
+    $allow_login = $row['allow_login'];
+    $maintenance = $row['maintenance'];
+
+    if($allow_login == 0){
+        $allow_login_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";
+        $allow_login_1 = "<a href='change.php?f=allow_login&s=1' class='waves-effect waves-light btn'><i class='mdi-navigation-check left'></i>Allow user login</a>";
+        $allow_login_status = "<span style='color: red;'>OFF</span>";
+    } else {
+        $allow_login_0 = "<a href='change.php?f=allow_login&s=0' class='waves-effect waves-light red btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";
+        $allow_login_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-navigation-check left'></i>Allow user login</a>";
+        $allow_login_status = "<span style='color: green;'>ON</span>";
+    }
+
+    if($maintenance == 0){
+        $maintenance_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
+        $maintenance_1 = "<a href='change.php?f=maintenance&s=1' class='waves-effect waves-light red btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
+        $maintenance_status = "<span style='color: red;'>OFF</span>";
+    } else {
+        $maintenance_0 = "<a href='change.php?f=maintenance&s=0' class='waves-effect waves-light btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
+        $maintenance_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
+        $maintenance_status = "<span style='color: orange;'>ON - Nobody can acces the site</span>";
+    }
+?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -33,16 +60,15 @@
               Help
             </a>
               <br>
-              <h4 class='light'>Maintenance mode - Currently: <span style='color: red;'>OFF</span></h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-action-lock-outline left"></i>Turn On Maintenance mode</a>
-              <a class="waves-effect waves-light red btn"><i class="mdi-action-lock-open left"></i>Turn Off Maintenance mode</a>
+              <h4 class='light'>Maintenance mode - Currently: <?php echo $maintenance_status; ?></h4>
+              <?php echo $maintenance_1; ?>
+              <?php echo $maintenance_0; ?>
+              
               <br>
-              <h4 class='light'>Allow user login - Currently: <span style='color: green;'>ON</span></h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-navigation-check left"></i>Allow user login</a>
-              <a class="waves-effect waves-light red btn"><i class="mdi-navigation-close left"></i>Disable user login</a>
-              <br>
-              <h4 class='light'>Message in all posts</h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-action-settings left"></i>Set Up</a>
+              <h4 class='light'>Allow user login - Currently: <?php echo $allow_login_status; ?></h4>
+              <?php echo $allow_login_1; ?>
+              <?php echo $allow_login_0; ?>
+              
 
     </div>
     

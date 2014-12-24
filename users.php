@@ -24,6 +24,92 @@
         </div>
       </div>
       <br>
+    <div id="modal1" class="modal">
+        <h2>User Codes</h2>
+        <b>All functions require <i>activate.php</i> located in noxen folder <code>&lt;?php require 'path/to/activate.php' ?&gt;</code></b><br><br>
+        <h4>User Registration</h4>
+        <p>To create a user registration using Noxen, just create a form in the page you want to have your registration page, and make sure you have the 'activate.php' file required in the page
+        <br>
+            
+        The next step is to make sure the form elements have the following names<br><br>
+        
+        <b>Form</b>    
+        <pre>method='POST'</pre>
+        
+        <b>Username Input</b>
+        <pre>name='register_user_set'</pre>
+        
+        <b>Email Input</b>
+        <pre>name='register_email_set'</pre>
+        
+        <b>Password Input</b>
+        <pre>name='register_pass_set'</pre>
+        
+        <b>Repeat Password Input</b>
+        <pre>name='register_repeat_pass_set'</pre>
+        
+        <b><i>Example</i></b>
+        <pre>
+&lt;?php require 'admin/activate.php' ?&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form method='POST'&gt;
+            &lt;input type='text' name='register_user_set' placeholder='Username'&gt;
+            &lt;input type='password' name='register_pass_set' placeholder='Password'&gt;
+            &lt;input type='password' name='register_repeat_pass_set' placeholder='Repeat Password'&gt;
+            &lt;input type='email' name='register_email_set' placeholder='Email'&gt;
+            &lt;input type='submit' value='Register'&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+                <h4>User Login</h4>
+        <p>To create a user login using Noxen, just create a form in the page you want to have your login page, and make sure you have the 'activate.php' file required in the page
+        <br>
+            
+        The next step is to make sure the form elements have the following names<br><br>
+        
+        <b>Form</b>    
+        <pre>method='POST'</pre>
+        
+        <b>Username Input</b>
+        <pre>name='login_user_set'</pre>
+        
+        <b>Password Input</b>
+        <pre>name='login_pass_set'</pre>
+
+        <b><i>Example</i></b>
+        <pre>
+&lt;?php require 'admin/activate.php' ?&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form method='POST'&gt;
+            &lt;input type='text' name='login_user_set' placeholder='Username'&gt;
+            &lt;input type='password' name='login_pass_set' placeholder='Password'&gt;
+            &lt;input type='submit' value='Register'&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        
+        <h4>Logout</h4>
+        <p>To create a logout simple create a file and call it: logout.php
+        <br>
+            
+        The next step is to make sure the file logout.php have the following text<br><br>
+        
+        <b>logout.php</b>    
+        <pre>
+&lt;?php
+session_start();
+session_destroy();
+header("Location: /");
+?&gt;
+        </pre>
+        After creating the file, just make sure you add a logout button somewhere and link it to logout.php
+        </p>
+        <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
+    </div>
       <div class="container">
         <div class="row">
           
@@ -39,7 +125,12 @@
               </i>
               User Settings
             </a>
-              <a class="waves-effect waves-light btn">
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+              <i class="mdi-action-settings-ethernet left">
+              </i>
+              Codes
+            </a>
+            <a class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help
@@ -102,7 +193,6 @@
                     </a>
                   </td>";
                     }
-
                 ?>
               </tbody>
         </table>

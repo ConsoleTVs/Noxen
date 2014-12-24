@@ -19,7 +19,7 @@ if(isset($_POST['editor1'])){
 
     $stmt->execute();
     
-    $_SESSION['msg'] = "toast('<span>Post Created</span><a class=\'btn-flat yellow-text\' href=\'post_edit.php\'>View Post<a>', 5000);";
+    $_SESSION['msg'] = "toast('<span>Post Created</span><a class=\'btn-flat yellow-text\' href=\'post_list.php\'>View Post<a>', 5000);";
     header("Location: post_create.php");
     die();
 }
@@ -51,7 +51,7 @@ if(isset($_POST['editor1'])){
         <div class="row">
           
           <div class='col s12 m12 l12'>
-  <a class="waves-effect waves-light btn">
+  <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help

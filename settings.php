@@ -20,7 +20,7 @@
     if($maintenance == 0){
         $maintenance_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
         $maintenance_1 = "<a href='change.php?f=maintenance&s=1' class='waves-effect waves-light red btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
-        $maintenance_status = "<span style='color: red;'>OFF</span>";
+        $maintenance_status = "<span style='color: green;'>OFF</span>";
     } else {
         $maintenance_0 = "<a href='change.php?f=maintenance&s=0' class='waves-effect waves-light btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
         $maintenance_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
@@ -54,7 +54,7 @@
         <div class="row">
           
           <div class='col s12 m12 l12'>
-  <a class="waves-effect waves-light btn">
+  <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help

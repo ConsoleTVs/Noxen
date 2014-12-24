@@ -204,6 +204,17 @@ try {
         echo "Connection failed: " . $e->getMessage();
     }
     
+    $stmt_check = $conn->prepare("SELECT * FROM settings WHERE id=1");
+    $stmt_check->execute();
+    $row = $stmt_check->fetch();
+    $hide_all_posts = $row['hide_all_posts'];
+
+    if($hide_all_posts == 1){
+        /*--------------------------EDITABLE HTML--------------------------*/
+        die("<h4>Posts are currently hidden, please check back later</h4>");
+        /*--------------------------EDITABLE HTML--------------------------*/
+    }
+    
     $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC");
     $statement->execute();
     while($row = $statement->fetch()){
@@ -242,10 +253,6 @@ function showPost() {
         require 'inc/settings.php';
         require 'lib/password.php';
 
-
-
-
-
         try {
                 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                 // set the PDO error mode to exception
@@ -256,6 +263,18 @@ function showPost() {
                 echo "Connection failed: " . $e->getMessage();
             }
 
+        $stmt_check = $conn->prepare("SELECT * FROM settings WHERE id=1");
+        $stmt_check->execute();
+        $row = $stmt_check->fetch();
+        $hide_all_posts = $row['hide_all_posts'];
+        $all_posts_message = $row['all_posts_message'];
+
+        if($hide_all_posts == 1){
+            /*--------------------------EDITABLE HTML--------------------------*/
+            die("<h4>Posts are currently hidden, please check back later</h4>");
+            /*--------------------------EDITABLE HTML--------------------------*/
+        }
+        
         $statement = $conn->prepare("SELECT * FROM posts WHERE id=:post_id");
         $statement->execute(array(':post_id' => $post_id));
         while($row = $statement->fetch()){
@@ -275,7 +294,7 @@ function showPost() {
         /*--------------------------EDITABLE HTML--------------------------*/
         
         echo "<h1>".$row['header']." <small style='font-size: 25px;'><i>".$row['date']."</i></small></h1>
-              <h4>".$full_text."</h4>";
+              <h4>".$all_posts_message.$full_text."</h4>";
         
         /*--------------------------EDITABLE HTML--------------------------*/
         }
@@ -285,5 +304,58 @@ function showPost() {
         //If you wish to redirect the user if he/she has not selected any post you can add the following text instead: header('Location: $post_page');
         /*--------------------------EDITABLE HTML--------------------------*/
     }
+}
+
+function showLastPost() {
+    session_start();
+        require 'inc/settings.php';
+        require 'lib/password.php';
+
+        try {
+                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                // set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+                catch(PDOException $e)
+            {
+                echo "Connection failed: " . $e->getMessage();
+            }
+
+        $stmt_check = $conn->prepare("SELECT * FROM settings WHERE id=1");
+        $stmt_check->execute();
+        $row = $stmt_check->fetch();
+        $hide_all_posts = $row['hide_all_posts'];
+        $all_posts_message = $row['all_posts_message'];
+
+        if($hide_all_posts == 1){
+            /*--------------------------EDITABLE HTML--------------------------*/
+            die("<h4>Posts are currently hidden, please check back later</h4>");
+            /*--------------------------EDITABLE HTML--------------------------*/
+        }
+        
+        $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC");
+        $statement->execute();
+        $row = $statement->fetch();
+
+        $full_text = $row['text'];
+        
+        
+        // You can edit the HTML below, just remember that:
+        
+        /*
+        $row['header'] -> Will output the post header
+        $row['date'] -> Will output the post date
+        $row['id'] -> Will output the post id (You need it when redirecting to the post page)
+        $row['text'] or $full_text -> Will output the FULL post text
+        */
+        
+        /*--------------------------EDITABLE HTML--------------------------*/
+        
+        echo "<h1>".$row['header']." <small style='font-size: 25px;'><i>".$row['date']."</i></small></h1>
+              <h4>".$all_posts_message.$full_text."</h4>";
+        
+        /*--------------------------EDITABLE HTML--------------------------*/
+        
+    
 }
 ?>

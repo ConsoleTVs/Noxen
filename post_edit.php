@@ -2,7 +2,35 @@
 <?php include 'inc/core.php' ?>
 <?php
 if(isset($_GET['id'])){
-    echo "EDIT MODE ENABLED";
+    $post_id = $_GET['id'];
+    $statement_post = $conn->prepare("SELECT * FROM posts WHERE id=:post_id");
+    $statement_post->execute(array(':post_id' => $post_id));
+    $row = $statement_post->fetch();
+    $current_header = $row['header'];
+    $current_text = $row['text'];
+} else {
+    $_SESSION['msg'] = "toast('Please select a post!', 3000);";
+    header("Location: post_list.php");
+    die();
+}
+
+if(isset($_POST['editor1'])){
+    
+    $new_header = $_POST['header'];
+    $new_text = $_POST['editor1'];
+    
+    $statement_post_change = $conn->prepare("UPDATE posts SET header=:new_header WHERE id=:post_id");
+    $statement_post_change->bindParam(':new_header', $new_header);
+    $statement_post_change->bindParam(':post_id', $post_id);
+    $statement_post_change->execute();
+    
+    $statement_post_change2 = $conn->prepare("UPDATE posts SET text=:new_text WHERE id=:post_id");
+    $statement_post_change2->bindParam(':new_text', $new_text);
+    $statement_post_change2->bindParam(':post_id', $post_id);
+    $statement_post_change2->execute();
+    
+    $_SESSION['msg'] = "toast('Post Updated!', 3000);";
+    header("Location: post_list.php");
     die();
 }
 ?>
@@ -33,35 +61,26 @@ if(isset($_GET['id'])){
         <div class="row">
           
           <div class='col s12 m12 l12'>
-  <a class="waves-effect waves-light btn">
+  <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help
             </a><br>
-              <?php
-    
-                    $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC");
-                    $statement->execute();
-                    while($row = $statement->fetch()){
-                        
-                        $full_text = $row['text'];
-                        $text = str_replace("</p>","",$full_text);
-                        $min_text = substr($text,0,200).'...</p>';
-                        
-                        echo "<h1 class='light'>".$row['header']." <small style='font-size: 25px;'><i>".$row['date']."</i></small></h1>
-              <h4 class='light'>".$min_text."</h4> 
-              <div style='text-align:right'>
-              <a class='waves-effect waves-light btn' href='post_edit.php?id=".$row['id']."'><i class='mdi-editor-mode-edit left'></i>Edit</a> 
-              <a class='waves-effect waves-light btn red' href='delete_post.php?id=".$row['id']."'><i class='mdi-action-delete left'></i>Delete</a>
-              </div>
-              <br>";
-                    }
-
-                if(isset($text)){} else {
-                    echo "<h1 class='light'>There are no posts yet...</h1><a class='waves-effect waves-light btn right' href='post_create.php'><i class='mdi-editor-mode-edit left'></i>Create Post</a>";
-                }
-
-                ?>
+              <form method='POST'>
+              <div class="input-field col s12">
+          <input value='<?php echo $current_header; ?>' id="header" name='header' id='header' type="text" required>
+          <label for="header">Post Title</label>
+        </div><br><br><br><br>
+              <center>
+              <textarea required class="ckeditor" name="editor1" id="editor1"><?php echo $current_text; ?></textarea>
+              </center>
+              <br>
+               
+              
+             <button class="btn waves-effect waves-light right" type="submit" name="action">Create Post
+    <i class="mdi-content-send right"></i>
+  </button>
+              </form>
               
     </div>
     

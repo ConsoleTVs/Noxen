@@ -1,6 +1,22 @@
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
-
+<?php
+if(isset($_POST['plan_set'])){
+    $default_user_plan_set = $_POST['plan_set'];
+    
+    $statement_plan_update = $conn->prepare("UPDATE settings SET default_user_plan=:default_user_plan_set");
+    $statement_plan_update->execute(array(':default_user_plan_set' => $default_user_plan_set));
+    
+    $statement_plan_update_text = $conn->prepare("SELECT * FROM plan WHERE id=:default_user_plan_set");
+    $statement_plan_update_text->execute(array(':default_user_plan_set' => $default_user_plan_set));
+    $row = $statement_plan_update_text->fetch();
+    $default_user_plan_text = $row['plan'];
+    
+    $_SESSION['msg'] = "toast('Default user plan is now $default_user_plan_text', 3000);";
+    header("Location: users.php");
+    die();
+}  
+?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -63,7 +79,7 @@
     &lt;/body&gt;
 &lt;/html&gt;
         </pre>
-                <h4>User Login</h4>
+        <h4>User Login</h4>
         <p>To create a user login using Noxen, just create a form in the page you want to have your login page, and make sure you have the 'activate.php' file required in the page
         <br>
             
@@ -106,21 +122,81 @@ session_destroy();
 header("Location: /");
 ?&gt;
         </pre>
-        After creating the file, just make sure you add a logout button somewhere and link it to logout.php
+        After creating the file, just make sure you add a logout button somewhere and link it to logout.php<br><br>
+        
+        <h4>Secure a page #1</h4>
+        <p>To secure a page and only allow to view it to registered users, use the following code:<br><br>
+        
+        <b>Secure #1 (Only registered members)</b>
+        <pre>
+&lt;?php
+require 'path/to/secure.php';
+?&gt;
+        </pre>
+        Make sure you link the file correctly, the file 'secure.php' is included in noxen's folder<br><br>
+        
+        <h4>Secure a page #2</h4>
+        <p>To secure a page and only allow to view it to a specific members, use the following code:<br><br>
+        
+        <b>Secure #2 (Only specified group)</b>
+        <pre>
+&lt;?php
+$allowed_group = 1;
+require 'path/to/only.php';
+?&gt;
+        </pre>
+        Make sure you link the file correctly, the file 'only.php' is included in noxen's folder
         </p>
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
     </div>
+    
+<div id="modal2" class="modal">
+        <h2>User Settings</h2>
+        <h4>User default plan</h4>
+        <p>
+            <form method="POST">
+            <label>Default user plan</label>
+<select name='plan_set' class="disabled">
+    <?php
+    $statement_plan_default = $conn->prepare("SELECT * FROM settings");
+    $statement_plan_default->execute();
+    $row = $statement_plan_default->fetch();
+    $default_user_plan = $row['default_user_plan'];
+
+
+    $count = "0";
+    $statement_plan = $conn->prepare("SELECT * FROM plan");
+    $statement_plan->execute();
+    while($row = $statement_plan->fetch()){
+        $count++;
+        $plan = $row['plan'];
+        if($row['id'] == $default_user_plan){
+            echo "<option value='$count' selected>$plan</option>";
+        } else {
+            echo "<option value='$count'>$plan</option>";
+        }
+    }
+    
+    ?>
+</select><br>
+<button class="btn waves-effect waves-light" type="submit" name="action">Set default group
+    <i class="mdi-content-send right"></i>
+</button></form>
+        </p>
+        <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
+</div>
+
       <div class="container">
         <div class="row">
           
           <div class='col s12 m12  l12'>
-            <a class="waves-effect waves-light btn">
+            <a class="waves-effect waves-light disabled btn">
               <i class="mdi-content-add left">
               </i>
               Create New User
             </a>
               
-              <a class="waves-effect waves-light btn">
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal2">
               <i class="mdi-action-settings left">
               </i>
               User Settings
@@ -130,7 +206,7 @@ header("Location: /");
               </i>
               Codes
             </a>
-            <a class="waves-effect waves-light btn">
+            <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help
@@ -182,7 +258,7 @@ header("Location: /");
                     ".$type_text."
                   </td>
                   <td>
-                    <a href='edit_user.php?id=$u_id' class='btn-floating'>
+                    <a "./*href='edit_user.php?id=$u_id'*/" class='btn-floating disabled'>
                       <i class='mdi-content-create'>
                       </i>
                     </a>

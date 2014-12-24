@@ -1,6 +1,6 @@
 <ul style='width: auto !important;' id="dropdown1" class="dropdown-content">
     <li><a href="post_create.php">Create Post</a></li>
-    <li><a href="post_edit.php">Edit Posts</a></li>
+    <li><a href="post_list.php">Edit Posts</a></li>
     <li><a href="post_settings.php">Post Settings</a></li>
     <li><a class='modal-trigger' href="#post_codes">Post Codes</a></li>
   </ul>
@@ -30,13 +30,13 @@
               </a>
             </li>
             <li>
-              <a href="settings.php">
-                Settings
+              <a href="administration.php">
+                Administration
               </a>
             </li>
             <li>
               <a href="settings.php">
-                Moderators
+                Settings
               </a>
             </li>
             <li>
@@ -67,6 +67,12 @@
         <br><br> 
         <b>Show a full post</b>    
         <pre>&lt;php showPost() ?&gt;</pre>
+        
+        <h4>Show the last post</h4>
+        <p>To show the full last post in a page, add the following code:
+        <br><br> 
+        <b>Show last post</b>    
+        <pre>&lt;php showLastPost() ?&gt;</pre>
         
         </p>
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>

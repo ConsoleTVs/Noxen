@@ -27,18 +27,18 @@
         <div class="row">
           
           <div class='col s12 m12 l12'>
-            <a class="waves-effect waves-light btn">
+            <a class="waves-effect waves-light btn disabled">
               <i class="mdi-content-add left">
               </i>
               Add subscriber
             </a>
-            <a class="waves-effect waves-light btn">
+            <a class="waves-effect waves-light btn disabled">
               <i class="mdi-communication-email left">
               </i>
               Send Mass Mail
             </a>
               
-            <a class="waves-effect waves-light btn">
+            <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help
@@ -74,7 +74,7 @@
                     ".$row['date']."
                   </td>
                   <td>            
-                    <a href='send.php?id=".$row['id']."' class='btn-floating'>
+                    <a "./* href='send.php?id=".$row['id']."' */" class='btn-floating disabled'>
                       <i class='mdi-communication-email'>
                       </i>
                     </a>

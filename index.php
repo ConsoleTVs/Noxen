@@ -31,7 +31,7 @@
                 <p class='flow-text'>Noxen is an Open Source solution for content managing, so in fact, it allows you to
                 create posts, edit them, set it's settings, and it also allows the webmaster to manage the website users
                 as well as the subscribers, so using Noxen you can manage your site from a single administration panel working in any device, yes, even mobile.</p><br>
-                <a class="waves-effect waves-light btn"><i class="mdi-action-help left"></i>Help</a>
+                <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn"><i class="mdi-action-help left"></i>Help</a>
                 <a class="waves-effect waves-light btn"><i class="mdi-editor-attach-money left"></i>Donate</a>
               <br>
 

@@ -30,10 +30,12 @@ if(isset($_POST['user_set'])){
     $statement->execute(array(':user_set' => $user_set));
     $row = $statement->fetch();
     $hash = $row['pass_hash'];
-    
+    $admin_id = $row['id'];
+        
     if(password_verify($pass_set, $hash)) {
         $_SESSION['msg'] = "toast('Welcome back, $user_set!', 3000);";
         $_SESSION['login'] = true;
+        $_SESSION['id'] = $admin_id;
         header("Location: index.php");
         die();
     } else {

@@ -1,5 +1,32 @@
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
+<?php
+    $statement = $conn->prepare("SELECT * FROM settings WHERE id=1");
+    $statement->execute();
+    $row = $statement->fetch();
+    $hide_all_posts = $row['hide_all_posts'];
+    $all_posts_message = $row['all_posts_message'];
+
+    if($hide_all_posts == 0){
+        $hide_all_posts_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-visibility left'></i>Show All Posts</a>";
+        $hide_all_posts_1 = "<a href='change.php?f=hide_all_posts&s=1' class='waves-effect waves-light red btn'><i class='mdi-action-visibility-off left'></i>Hide All Posts</a>";
+        $hide_all_posts_status = "<span style='color: green;'>OFF</span>";
+    } else {
+        $hide_all_posts_0 = "<a href='change.php?f=hide_all_posts&s=0' class='waves-effect waves-light btn'><i class='mdi-action-visibility left'></i>Show All Posts</a>";
+        $hide_all_posts_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-visibility-off left'></i>Hide All Posts</a>";
+        $hide_all_posts_status = "<span style='color: orange;'>ON - No post is beeing shown</span>";
+    }
+
+    if(isset($_POST['editor1'])){
+        $all_posts_message = $_POST['editor1'];
+        $statement_editor = $conn->prepare("UPDATE settings SET all_posts_message=:all_posts_message WHERE id=1");
+        $statement_editor->execute(array(':all_posts_message' => $all_posts_message));
+        $_SESSION['msg'] = "toast('All posts message changed!', 3000);";
+        header("Location: post_settings.php");
+        die();
+    }
+
+?>
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
@@ -27,23 +54,33 @@
         <div class="row">
           
           <div class='col s12 m12 l12'>
-  <a class="waves-effect waves-light btn">
+  <a href='https://github.com/ConsoleTVs/Noxen/' class="waves-effect waves-light btn">
               <i class="mdi-action-help left">
               </i>
               Help
             </a>
               <br>
-              <h4 class='light'>Show Post Date - Currently: <span style='color: green;'>ON</span></h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-notification-event-available left"></i>Turn On Post Date</a>
-              <a class="waves-effect waves-light red btn"><i class="mdi-notification-event-busy left"></i>Turn Off Post Date</a>
-              <br>
-              <h4 class='light'>Hide all the posts - Currently: <span style='color: red;'>OFF</span></h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-action-visibility left"></i>Show All Posts</a>
-              <a class="waves-effect waves-light red btn"><i class="mdi-action-visibility-off left"></i>Hide All Posts</a>
+              <h4 class='light'>Hide all the posts - Currently: <?php echo $hide_all_posts_status; ?></h4>
+              <?php echo $hide_all_posts_1; ?>
+              <?php echo $hide_all_posts_0; ?>
               <br>
               <h4 class='light'>Message in all posts</h4>
-              <a class="waves-effect waves-light btn"><i class="mdi-action-settings left"></i>Set Up</a>
-
+              <a class="waves-effect waves-light btn modal-trigger" href='#msg_posts'><i class="mdi-action-settings left"></i>Set Up</a>
+              
+              <div id="msg_posts" class="modal">
+        <h2>Message in all posts</h2>
+        <span>The following message will appear in all the posts, at the start of the text</span>
+        <p>
+            <form method="POST">
+                <textarea required class="ckeditor" name="editor1" id="editor1"><?php echo $all_posts_message; ?></textarea><br>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </form>
+        </p>
+        <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
+    </div>
+            
     </div>
     
   </div>

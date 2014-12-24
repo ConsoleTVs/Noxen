@@ -1998,6 +1998,11 @@ li {
   -moz-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22); }
 
+.divider {
+  height: 1px;
+  overflow: hidden;
+  background-color: #e0e0e0; }
+
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
@@ -2011,6 +2016,12 @@ i {
   i.right {
     float: right;
     margin-left: 15px; }
+  i.small {
+    font-size: 2rem; }
+  i.medium {
+    font-size: 4rem; }
+  i.large {
+    font-size: 6rem; }
 
 img.responsive-img {
   max-width: 100%;
@@ -5345,11 +5356,6 @@ ul.tabs li.tab {
   .btn-large i {
     font-size: 1.6rem; }
 
-li.divider {
-  height: 1px;
-  overflow: hidden;
-  background-color: #eeeeee; }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -5607,6 +5613,11 @@ li.no-padding {
   position: relative; }
   .materialboxed:hover {
     will-change: left, top; }
+    .materialboxed:hover:not(.active) {
+      -webkit-filter: brightness(95%);
+      -moz-filter: brightness(95%);
+      -o-filter: brightness(95%);
+      -ms-filter: brightness(95%); }
 
 .materialboxed.active {
   cursor: zoom-out; }
@@ -5617,6 +5628,20 @@ li.no-padding {
   left: 0px;
   background-color: #292929;
   z-index: 999; }
+
+.materialbox-caption {
+  position: fixed;
+  display: none;
+  color: #fff;
+  line-height: 50px;
+  bottom: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0% 15%;
+  height: 50px;
+  z-index: 1000;
+  -webkit-font-smoothing: antialiased; }
 
 label {
   font-size: 0.8rem;

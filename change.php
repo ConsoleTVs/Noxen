@@ -10,6 +10,38 @@ if(isset($_GET['f'])){
     die();
 }
 
+if($_GET['f'] == "change_password"){
+    if(isset($_GET['id'])){
+        if($_SESSION['id'] == $_GET['id']){
+            $id = $_SESSION['id'];
+            $statement_admin = $conn->prepare("SELECT * FROM admins WHERE id=:id");
+            $statement_admin->execute(array(':id' => $id));
+            $row = $statement_admin->fetch();
+            $admin_name = $row['username'];
+            
+            if($admin_name == 'admin'){
+                $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
+                $_SESSION['token'] = $token;
+                header("Location: change_password.php?token=$token&id=$id");
+                die();
+            } else {
+                $_SESSION['msg'] = "toast('You're not the admin!', 3000);";
+                header("Location: index.php");
+                die();
+            }
+        } else {
+            $_SESSION['msg'] = "toast('You have no permission!', 3000);";
+            header("Location: index.php");
+            die(); 
+        }
+    } else {
+        $_SESSION['msg'] = "toast('No user selected!', 3000);";
+        header("Location: index.php");
+        die();
+    }
+    die();
+}
+
 if(isset($_GET['s'])){
     $new_value = $_GET['s'];
 } else {

@@ -3,6 +3,7 @@
 session_start();
 
 require 'inc/settings.php';
+require 'lib/password.php';
 
 if(isset($_SESSION['login'])){
     if($_SESSION['login'] == true){

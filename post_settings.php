@@ -7,12 +7,16 @@
     $hide_all_posts = $row['hide_all_posts'];
     $all_posts_message = $row['all_posts_message'];
 
+    $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
+    $_SESSION['token'] = $token;
+    
+
     if($hide_all_posts == 0){
         $hide_all_posts_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-visibility left'></i>Show All Posts</a>";
-        $hide_all_posts_1 = "<a href='change.php?f=hide_all_posts&s=1' class='waves-effect waves-light red btn'><i class='mdi-action-visibility-off left'></i>Hide All Posts</a>";
+        $hide_all_posts_1 = "<a href='change.php?f=hide_all_posts&s=1&token=$token' class='waves-effect waves-light red btn'><i class='mdi-action-visibility-off left'></i>Hide All Posts</a>";
         $hide_all_posts_status = "<span style='color: green;'>OFF</span>";
     } else {
-        $hide_all_posts_0 = "<a href='change.php?f=hide_all_posts&s=0' class='waves-effect waves-light btn'><i class='mdi-action-visibility left'></i>Show All Posts</a>";
+        $hide_all_posts_0 = "<a href='change.php?f=hide_all_posts&s=0&token=$token' class='waves-effect waves-light btn'><i class='mdi-action-visibility left'></i>Show All Posts</a>";
         $hide_all_posts_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-visibility-off left'></i>Hide All Posts</a>";
         $hide_all_posts_status = "<span style='color: orange;'>ON - No post is beeing shown</span>";
     }

@@ -50,6 +50,18 @@ if(isset($_GET['s'])){
     die();
 }
 
+if(!$_GET['token']){
+    $_SESSION['msg'] = "toast('No token detected!', 3000);";
+    header("Location: index.php");
+    die();
+}
+
+if($_GET['token'] != $_SESSION['token']){
+    $_SESSION['msg'] = "toast('Token missmatch!', 3000);";
+    header("Location: index.php");
+    die();
+}
+
 $stmt = $conn->prepare("UPDATE settings SET $function=:new_value WHERE id='1'");
 $stmt->execute(array(':new_value' => $new_value));
 

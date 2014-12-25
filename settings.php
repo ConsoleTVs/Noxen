@@ -7,22 +7,25 @@
     $allow_login = $row['allow_login'];
     $maintenance = $row['maintenance'];
 
+    $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
+    $_SESSION['token'] = $token;
+
     if($allow_login == 0){
         $allow_login_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";
-        $allow_login_1 = "<a href='change.php?f=allow_login&s=1' class='waves-effect waves-light btn'><i class='mdi-navigation-check left'></i>Allow user login</a>";
+        $allow_login_1 = "<a href='change.php?f=allow_login&s=1&token=$token' class='waves-effect waves-light btn'><i class='mdi-navigation-check left'></i>Allow user login</a>";
         $allow_login_status = "<span style='color: red;'>OFF</span>";
     } else {
-        $allow_login_0 = "<a href='change.php?f=allow_login&s=0' class='waves-effect waves-light red btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";
+        $allow_login_0 = "<a href='change.php?f=allow_login&s=0&token=$token' class='waves-effect waves-light red btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";
         $allow_login_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-navigation-check left'></i>Allow user login</a>";
         $allow_login_status = "<span style='color: green;'>ON</span>";
     }
 
     if($maintenance == 0){
         $maintenance_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
-        $maintenance_1 = "<a href='change.php?f=maintenance&s=1' class='waves-effect waves-light red btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
+        $maintenance_1 = "<a href='change.php?f=maintenance&s=1&token=$token' class='waves-effect waves-light red btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
         $maintenance_status = "<span style='color: green;'>OFF</span>";
     } else {
-        $maintenance_0 = "<a href='change.php?f=maintenance&s=0' class='waves-effect waves-light btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
+        $maintenance_0 = "<a href='change.php?f=maintenance&s=0&token=$token' class='waves-effect waves-light btn'><i class='mdi-action-lock-open left'></i>Turn Off Maintenance mode</a>";
         $maintenance_1 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-action-lock-outline left'></i>Turn On Maintenance mode</a>";
         $maintenance_status = "<span style='color: orange;'>ON - Nobody can acces the site</span>";
     }

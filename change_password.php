@@ -4,6 +4,18 @@
     
 if(isset($_POST['new_password'])){
     
+    if(!$_SESSION['token']){
+        $_SESSION['msg'] = "toast('Token not set!', 3000);";
+        header("Location: index.php");
+        die();
+    }
+    
+    if(!$_GET['token']){
+        $_SESSION['msg'] = "toast('Token not set!', 3000);";
+        header("Location: index.php");
+        die();
+    }
+    
    if($_SESSION['token'] != $_GET['token']){
     $_SESSION['msg'] = "toast('Token missmatch, please try again!', 3000);";
     header("Location: index.php");
@@ -46,7 +58,19 @@ if($admin_name != 'admin'){
     header("Location: login.php");
     die();
 }
-    
+
+if(!$_SESSION['token']){
+    $_SESSION['msg'] = "toast('Token not set!', 3000);";
+    header("Location: index.php");
+    die();
+}
+
+if(!$_GET['token']){
+        $_SESSION['msg'] = "toast('Token not set!', 3000);";
+        header("Location: index.php");
+        die();
+    }
+
 if($_SESSION['token'] != $_GET['token']){
     $_SESSION['msg'] = "toast('Token missmatch, please try again!', 3000);";
     header("Location: index.php");

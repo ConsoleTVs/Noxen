@@ -18,12 +18,16 @@ if($_GET['f'] == "change_password"){
             $statement_admin->execute(array(':id' => $id));
             $row = $statement_admin->fetch();
             $admin_name = $row['username'];
-            
             if($admin_name == 'admin'){
-                $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
-                $_SESSION['token'] = $token;
-                header("Location: change_password.php?token=$token&id=$id");
-                die();
+                if(!$_SESSION['token']){
+                    $_SESSION['msg'] = "toast('You have no token!', 3000);";
+                    header("Location: index.php");
+                    die();
+                } else {
+                    $token = $_SESSION['token'];
+                    header("Location: change_password.php?token=$token&id=$id");
+                    die();
+                }
             } else {
                 $_SESSION['msg'] = "toast('You're not the admin!', 3000);";
                 header("Location: index.php");

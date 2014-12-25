@@ -7,8 +7,7 @@
     $allow_login = $row['allow_login'];
     $maintenance = $row['maintenance'];
 
-    $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
-    $_SESSION['token'] = $token;
+    $token = $_SESSION['token'];
 
     if($allow_login == 0){
         $allow_login_0 = "<a class='waves-effect waves-light disabled btn'><i class='mdi-navigation-close left'></i>Disable user login</a>";

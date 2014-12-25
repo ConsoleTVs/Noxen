@@ -10,6 +10,12 @@ $date = "$mydate[month] $mydate[mday], $mydate[year]";
 if(isset($_POST['editor1'])){
     $header = $_POST['header'];
     $text = $_POST['editor1'];
+    $token = $_POST['token'];
+        if($_POST['token'] != $_SESSION['token']){
+            $_SESSION['msg'] = "toast('Token missmatch!', 3000);";
+            header("Location: index.php");
+            die();
+        }
     
     $stmt = $conn->prepare("INSERT INTO posts (header, text, date)
     VALUES (:header, :text, :date)");
@@ -66,7 +72,7 @@ if(isset($_POST['editor1'])){
               </center>
               <br>
                
-              
+              <input style='display: none;' type='text' name='token' id='token' value='<?php echo $_SESSION['token']; ?>'>
              <button class="btn waves-effect waves-light right" type="submit" name="action">Create Post
     <i class="mdi-content-send right"></i>
   </button>

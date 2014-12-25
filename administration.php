@@ -49,7 +49,7 @@
               <br>
                 <h4 class='light'><b>Administrator:</b></h4>
                 <p class='flow-text'>Username: admin</p>
-                <p class='flow-text'>Password: *censored* <a href='change.php?f=change_password&id=<?php echo $_SESSION['id']; ?>'>[Change Password]</a></p>
+                <p class='flow-text'>Password: *censored* <a href='change.php?f=change_password&token=<?php echo $_SESSION['token']; ?>&id=<?php echo $_SESSION['id']; ?>'>[Change Password]</a></p>
     </div>
     
   </div>

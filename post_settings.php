@@ -7,8 +7,7 @@
     $hide_all_posts = $row['hide_all_posts'];
     $all_posts_message = $row['all_posts_message'];
 
-    $token = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
-    $_SESSION['token'] = $token;
+    $token = $_SESSION['token'];
     
 
     if($hide_all_posts == 0){
@@ -23,6 +22,12 @@
 
     if(isset($_POST['editor1'])){
         $all_posts_message = $_POST['editor1'];
+        $token = $_POST['token'];
+        if($_POST['token'] != $_SESSION['token']){
+            $_SESSION['msg'] = "toast('Token missmatch!', 3000);";
+            header("Location: index.php");
+            die();
+        }
         $statement_editor = $conn->prepare("UPDATE settings SET all_posts_message=:all_posts_message WHERE id=1");
         $statement_editor->execute(array(':all_posts_message' => $all_posts_message));
         $_SESSION['msg'] = "toast('All posts message changed!', 3000);";
@@ -77,6 +82,7 @@
         <p>
             <form method="POST">
                 <textarea required class="ckeditor" name="editor1" id="editor1"><?php echo $all_posts_message; ?></textarea><br>
+                <input style='display: none;' type='text' name='token' id='token' value='<?php echo $_SESSION['token']; ?>'>
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i class="mdi-content-send right"></i>
                 </button>

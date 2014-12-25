@@ -15,8 +15,6 @@ if(isset($_POST['user_set'])){
     $user_set = $_POST['user_set'];
     $pass_set = $_POST['pass_set'];
 
-    
-    
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
@@ -37,6 +35,7 @@ if(isset($_POST['user_set'])){
         $_SESSION['msg'] = "toast('Welcome back, $user_set!', 3000);";
         $_SESSION['login'] = true;
         $_SESSION['id'] = $admin_id;
+        $_SESSION['token'] = rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9).rand(0,9);
         header("Location: index.php");
         die();
     } else {

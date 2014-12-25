@@ -3,7 +3,7 @@
 <?php
     
 if(isset($_POST['new_password'])){
-    
+    session_start();
     if(!$_SESSION['token']){
         $_SESSION['msg'] = "toast('Token not set!', 3000);";
         header("Location: index.php");
@@ -58,15 +58,15 @@ if($admin_name != 'admin'){
     header("Location: login.php");
     die();
 }
-
+session_start();
 if(!$_SESSION['token']){
-    $_SESSION['msg'] = "toast('Token not set!', 3000);";
+    $_SESSION['msg'] = "toast('Token not set s!', 3000);";
     header("Location: index.php");
     die();
 }
 
 if(!$_GET['token']){
-        $_SESSION['msg'] = "toast('Token not set!', 3000);";
+        $_SESSION['msg'] = "toast('Token not set g!', 3000);";
         header("Location: index.php");
         die();
     }
@@ -131,7 +131,7 @@ if($admin_name != 'admin'){
                     <div class="input-field col s6">
                         <input id="header" name='new_password' id='new_password' type="password" required>
                         <label for="header">New Password</label>
-                    </div><br><br>
+                    </div><br><br><br><br>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Change Password
                         <i class="mdi-content-send right"></i>
                     </button>

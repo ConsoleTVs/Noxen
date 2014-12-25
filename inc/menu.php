@@ -60,19 +60,19 @@
         <p>To show all posts in a page, add the following code (please note that the post text will be max: 200 characters):
         <br><br> 
         <b>Show all posts</b>    
-        <pre>&lt;php showPosts() ?&gt;</pre>
+        <pre>&lt;?php showPosts() ?&gt;</pre>
         
         <h4>Show a full post</h4>
         <p>To show a full post in a page, add the following code (please note that it will need the post id, automatatic redirect with id when press 'Read More' a post from 'Show all posts' funcion above):
         <br><br> 
         <b>Show a full post</b>    
-        <pre>&lt;php showPost() ?&gt;</pre>
+        <pre>&lt;?php showPost() ?&gt;</pre>
         
         <h4>Show the last post</h4>
         <p>To show the full last post in a page, add the following code:
         <br><br> 
         <b>Show last post</b>    
-        <pre>&lt;php showLastPost() ?&gt;</pre>
+        <pre>&lt;?php showLastPost() ?&gt;</pre>
         
         </p>
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>

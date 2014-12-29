@@ -145,8 +145,28 @@ $allowed_group = 1;
 require 'path/to/only.php';
 ?&gt;
         </pre>
-        Make sure you link the file correctly, the file 'only.php' is included in noxen's folder
+        Make sure you link the file correctly, the file 'only.php' is included in noxen's folder<br><br>
+        <h4>User variables</h4>
+        <p>To recive some user variables use the following created variables:
+        <br><br>
+        <b>Username</b>    
+        <pre>
+&lt;?php echo $user_name; ?&gt;
+        </pre>
+        <b>User email</b>    
+        <pre>
+&lt;?php echo $user_email; ?&gt;
+        </pre>
+        <b>User type (plan) (id number)</b>    
+        <pre>
+&lt;?php echo $user_type; ?&gt;
+        </pre>
+        <b>User plan (text)</b>    
+        <pre>
+&lt;?php echo $user_plan; ?&gt;
+        </pre>
         </p>
+      
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
     </div>
     

@@ -32,6 +32,20 @@ try {
         /*--------------------------EDITABLE HTML--------------------------*/
     }
 
+    if(isset($_SESSION['id'])){
+        $stmt_data = $conn->prepare("SELECT * FROM users WHERE id=:user_id");
+    $stmt_data->execute(array(':user_id' => $_SESSION['id']));
+    $row = $stmt_data->fetch();
+    $user_name = $row['username'];
+    $user_email = $row['email'];
+    $user_type = $row['type'];
+    
+    $stmt_data2 = $conn->prepare("SELECT * FROM plan WHERE id=:type");
+    $stmt_data2->execute(array(':type' => $user_type));
+    $row = $stmt_data2->fetch();
+    $user_plan = $row['plan'];
+    }
+
 function loginUser() {
 session_start();
 require 'inc/settings.php';

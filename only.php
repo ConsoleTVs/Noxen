@@ -10,7 +10,7 @@ if($_SESSION['user_login'] == false){
 }
 
     if(isset($allowed_plan)){
-        $user_id = $_SESSION['id'];
+        $user_id = $_SESSION['u_id'];
         $stmt_check_plan_type = $conn->prepare("SELECT * FROM users WHERE id=:user_id");
         $stmt_check_plan_type->execute(array(':user_id' => $user_id));
         $row = $stmt_check_plan_type->fetch();

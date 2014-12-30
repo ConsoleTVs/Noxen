@@ -32,9 +32,9 @@ try {
         /*--------------------------EDITABLE HTML--------------------------*/
     }
 
-    if(isset($_SESSION['id'])){
+    if(isset($_SESSION['u_id'])){
         $stmt_data = $conn->prepare("SELECT * FROM users WHERE id=:user_id");
-    $stmt_data->execute(array(':user_id' => $_SESSION['id']));
+    $stmt_data->execute(array(':user_id' => $_SESSION['u_id']));
     $row = $stmt_data->fetch();
     $user_name = $row['username'];
     $user_email = $row['email'];
@@ -95,7 +95,7 @@ require 'lib/password.php';
     
     if (password_verify($pass_set, $pass_hash)) {
         $_SESSION['user_login'] = true;
-        $_SESSION['id'] = $user_id;
+        $_SESSION['u_id'] = $user_id;
         header("Location: $post_login_page");
     } else {
         /*--------------------------EDITABLE HTML--------------------------*/

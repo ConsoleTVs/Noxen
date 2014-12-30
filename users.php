@@ -130,7 +130,7 @@ header("Location: /");
         <b>Secure #1 (Only registered members)</b>
         <pre>
 &lt;?php
-require 'path/to/secure.php';
+require 'path/to/secured.php';
 ?&gt;
         </pre>
         Make sure you link the file correctly, the file 'secure.php' is included in noxen's folder<br><br>

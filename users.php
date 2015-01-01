@@ -171,10 +171,14 @@ require 'path/to/only.php';
     </div>
     
 <div id="modal2" class="modal">
-        <h2>User Settings</h2>
+      <div class="row">
+           <div class='col l6'>
+    <h2>User Settings</h2>
         <h4>User default plan</h4>
         <p>
             <form method="POST">
+              
+                   
             <label>Default user plan</label>
 <select name='plan_set' class="disabled">
     <?php
@@ -185,7 +189,7 @@ require 'path/to/only.php';
 
 
     $count = "0";
-    $statement_plan = $conn->prepare("SELECT * FROM plan");
+    $statement_plan = $conn->prepare("SELECT * FROM plan ORDER BY id ASC");
     $statement_plan->execute();
     while($row = $statement_plan->fetch()){
         $count++;
@@ -201,7 +205,9 @@ require 'path/to/only.php';
 </select><br>
 <button class="btn waves-effect waves-light" type="submit" name="action">Set default group
     <i class="mdi-content-send right"></i>
-</button></form>
+</button>
+          </div>  </div>
+                    </form>
         </p>
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
 </div>
@@ -278,7 +284,7 @@ require 'path/to/only.php';
                     ".$type_text."
                   </td>
                   <td>
-                    <a "./*href='edit_user.php?id=$u_id'*/" class='btn-floating disabled'>
+                    <a href='edit_user.php?id=$u_id' class='btn-floating'>
                       <i class='mdi-content-create'>
                       </i>
                     </a>

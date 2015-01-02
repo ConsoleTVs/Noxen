@@ -83,7 +83,7 @@ if(isset($_POST['action'])){
       </div>
                     <div class="input-field col s6">
         <span>User Plan:</span>
-<select name='plan_set' class="disabled">
+<select name='plan_set' class="browser-default">
     <?php
     $count = "0";
     $statement_plan = $conn->prepare("SELECT * FROM plan ORDER BY id ASC");

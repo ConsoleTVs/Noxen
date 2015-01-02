@@ -15,7 +15,27 @@ if(isset($_POST['plan_set'])){
     $_SESSION['msg'] = "toast('Default user plan is now $default_user_plan_text', 3000);";
     header("Location: users.php");
     die();
-}  
+}
+if(isset($_POST['create_user'])){
+    $create_user_username = $_POST['create_user_username'];
+    $create_user_password = $_POST['create_user_password'];
+    $create_user_email = $_POST['create_user_email'];
+    $create_user_type = $_POST['create_user_type'];
+    
+    $create_user_password_hash = password_hash($create_user_password, PASSWORD_BCRYPT);
+    
+    $statement_create_user = $conn->prepare("INSERT INTO users (username, pass_hash, email, type) VALUES (:username, :password, :email, :type)");
+    $statement_create_user->bindParam(':username', $create_user_username);
+    $statement_create_user->bindParam(':password', $create_user_password_hash);
+    $statement_create_user->bindParam(':email', $create_user_email);
+    $statement_create_user->bindParam(':type', $create_user_type);
+    $statement_create_user->execute();
+
+    
+    $_SESSION['msg'] = "toast('User $create_user_username created', 3000);";
+    header("Location: users.php");
+    die();
+} 
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,6 +60,12 @@ if(isset($_POST['plan_set'])){
         </div>
       </div>
       <br>
+      
+      
+      
+      
+      
+      
     <div id="modal1" class="modal">
         <h2>User Codes</h2>
         <b>All functions require <i>activate.php</i> located in noxen folder <code>&lt;?php require 'path/to/activate.php' ?&gt;</code></b><br><br>
@@ -170,6 +196,93 @@ require 'path/to/only.php';
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
     </div>
     
+    
+    
+    
+    
+    
+    
+    
+    <div id="modal3" class="modal">
+   
+        <div class="row">
+
+  <form method="POST" class="col s12">
+    <div class="row">
+        <h2>Create new user</h2>
+                
+        <h4>User details</h4><br>
+      <div class="input-field col s6">
+          <input style="display:none" type="text" name="fakeusernameremembered"/>
+        <input id="username" name="create_user_username" type="text" class="validate">
+        <label for="username">Username</label>
+      </div>
+      <div class="input-field col s6">
+          <input style="display:none" type="password" name="fakepasswordremembered"/>
+        <input id="password" name="create_user_password" type="password" class="validate">
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" name="create_user_email" type="email" class="validate">
+        <label for="email">Email</label>
+      </div>
+    </div>
+      
+      
+       <div class="row">
+      <div class="input-field col s6">
+      
+      <span>User Plan</span>
+      <select name='create_user_type' class="browser-default">
+    <?php
+    $statement_plan_default = $conn->prepare("SELECT * FROM settings");
+    $statement_plan_default->execute();
+    $row = $statement_plan_default->fetch();
+    $default_user_plan = $row['default_user_plan'];
+
+
+    $count = "0";
+    $statement_plan = $conn->prepare("SELECT * FROM plan ORDER BY id ASC");
+    $statement_plan->execute();
+    while($row = $statement_plan->fetch()){
+        $count++;
+        $plan = $row['plan'];
+        if($row['id'] == $default_user_plan){
+            echo "<option value='$count' selected>$plan</option>";
+        } else {
+            echo "<option value='$count'>$plan</option>";
+        }
+    }
+    
+    ?>
+</select>
+          <br>
+      </div>
+       <div class="input-field col s6">
+      <br><br>
+        <button class="btn waves-effect waves-light right" type="submit" name="create_user">Create User
+            <i class="mdi-content-send right"></i>
+        </button>
+           
+      </div>
+    </div>
+      
+  </form>
+</div>
+        
+        
+        
+    <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
+    </div>
+    
+    
+    
+    
+    
+    
+    
 <div id="modal2" class="modal">
       <div class="row">
            <div class='col l6'>
@@ -180,7 +293,7 @@ require 'path/to/only.php';
               
                    
             <label>Default user plan</label>
-<select name='plan_set' class="disabled">
+<select name='plan_set' class="browser-default">
     <?php
     $statement_plan_default = $conn->prepare("SELECT * FROM settings");
     $statement_plan_default->execute();
@@ -216,7 +329,7 @@ require 'path/to/only.php';
         <div class="row">
           
           <div class='col s12 m12  l12'>
-            <a class="waves-effect waves-light disabled btn">
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal3">
               <i class="mdi-content-add left">
               </i>
               Create New User

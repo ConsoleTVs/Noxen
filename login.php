@@ -48,26 +48,23 @@ if(isset($_POST['user_set'])){
 <!DOCTYPE html>
 <html>
   <?php include 'inc/header.php' ?>
-  
-  <body>
+   <body style="background-color: #3498db;">
       
-      <div class="section fullDiv" id="home-page">
+       
         <div class="container">
-          <div class="row">
-            <div class="col s12 m12 center">
-              <h1 class="header light center-on-small-only ">
+            <div class="row">
+                              <h1 class="center white-text light center-on-small-only ">
                 Noxen - CMS
               </h1>
-              <h4 class ="light white-text lighten-4 center-on-small-only">
+              <h4 class ="light center white-text lighten-4 center-on-small-only">
                 Please login below
               </h4>
                 <br><br>
-            <div class="row">
-              <div class="col l4 offset-l4 col m6 offset-m3 col s12">
+                              <div class="col l4 offset-l4 col m6 offset-m3 col s12 center">
                 <div class="card-panel white">
                     <form method='POST'><br>
-                        <span style='font-size: 20px;' class='light'>Administrator Login</span><br><br>
-                        <?php if(isset($login_msg)){ echo "<span style='font-size: 15px; color: red;' class='light'>$login_msg</span><br>";} ?>
+                        <span style='font-size: 20px;' class='light center'>Administrator Login</span><br><br>
+                        <?php if(isset($login_msg)){ echo "<span style='font-size: 15px; color: red;' class='light center'>$login_msg</span><br>";} ?>
                         <div class="input-field">
                             <input style="display:none" type="text" name="fakeusernameremembered"/>
                           <input id="user_set" name="user_set" type="text" required>
@@ -90,12 +87,8 @@ if(isset($_POST['user_set'])){
                 </div>
               </div>
             </div>
-          
-            </div>
-          </div>
         </div>
-      </div>
-
+       
       <!-- MUST INCLUDE THE FOOTER !-->
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js">

@@ -171,7 +171,7 @@ $allowed_group = 1;
 require 'path/to/only.php';
 ?&gt;
         </pre>
-        Make sure you link the file correctly, the file 'only.php' is included in noxen's folder<br><br>
+        Make sure you link the file correctly, the file 'only.php' is included in noxen's folder, then just change the number (x) in: "$allowed_group = x" for the group you want to allow access to.<br><br>
         <h4>User variables</h4>
         <p>To recive some user variables use the following created variables:
         <br><br>
@@ -232,10 +232,10 @@ require 'path/to/only.php';
       
       
        <div class="row">
-      <div class="input-field col s6">
+      <div class="col s6">
       
-      <span>User Plan</span>
-      <select name='create_user_type' class="browser-default">
+      <label for="create_user_type">User Plan</label>
+      <select name='create_user_type' >
     <?php
     $statement_plan_default = $conn->prepare("SELECT * FROM settings");
     $statement_plan_default->execute();
@@ -292,8 +292,8 @@ require 'path/to/only.php';
             <form method="POST">
               
                    
-            <label>Default user plan</label>
-<select name='plan_set' class="browser-default">
+            <label for="plan_set">User Plan</label>
+<select name='plan_set' >
     <?php
     $statement_plan_default = $conn->prepare("SELECT * FROM settings");
     $statement_plan_default->execute();

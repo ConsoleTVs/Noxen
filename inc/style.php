@@ -16,18 +16,6 @@
 	position:relative
 }
 
-#home-page {
-	background-color:#3498db
-}
-#home-page .container {
-	position:relative
-}
-#home-page .header {
-	color:#FFF
-}
-#home-page h4 {
-	margin-bottom:40px
-}
         #front-page-nav {
 	background-color:#FFF;
 	position:relative

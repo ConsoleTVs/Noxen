@@ -1,5 +1,6 @@
 <?php include 'inc/settings.php' ?>
 <?php include 'inc/core.php' ?>
+<?php include 'inc/admin_only.php' ?>
 <?php
     
 if(isset($_POST['new_password'])){
@@ -58,7 +59,7 @@ if($admin_name != 'admin'){
     header("Location: login.php");
     die();
 }
-session_start();
+
 if(!$_SESSION['token']){
     $_SESSION['msg'] = "toast('Token not set s!', 3000);";
     header("Location: index.php");
@@ -128,10 +129,16 @@ if($admin_name != 'admin'){
             <div class='col s12 m12 l12'>
                 <h1 class='light flow-text' style='font-size: 40px;'>Your new password:</h1><br>
                 <form method='POST'>
+                    
                     <div class="input-field col s6">
-                        <input id="header" name='new_password' id='new_password' type="password" required>
-                        <label for="header">New Password</label>
-                    </div><br><br><br><br>
+                        <input name='old_password' id='old_password' type="password" required>
+                        <label for="old_password">Current Password</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input name='new_password' id='new_password' type="password" required>
+                        <label for="new_password">New Password</label>
+                    </div>
+                    <br><br><br><br>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Change Password
                         <i class="mdi-content-send right"></i>
                     </button>

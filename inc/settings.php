@@ -28,7 +28,7 @@ $dbname = "noxen";
 $post_page = "post.php"; // File where any full post is going to show
 $login_page = "login.php"; // File where the users log-in (where the login form is located)
 $post_login_page = "secured.php"; // File where the user gets redirected after he/she has logged in
-
+$maintenance_page = "maintenance.php"; // File where the user will get redirected if the website is under maintenance
 
 
 

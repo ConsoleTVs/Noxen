@@ -77,13 +77,14 @@ if(isset($_POST['action'])){
                 <form method='POST'>
                     <input style="display: none;" type="text" name='token' value="<?php echo $_SESSION['token']; ?>">
                     <h1 class='light flow-text' style='font-size: 40px;'>User Information:</h1><br>
-                    <div class="input-field col s6">
+                    <div class="col s6">
+                        <label for="email_set">User email</label>
         <input id="email_set" name='email_set' type="email" value="<?php echo $user_edit_email; ?>" class="validate">
-        <label for="email_set">User email</label>
+        
       </div>
-                    <div class="input-field col s6">
-        <span>User Plan:</span>
-<select name='plan_set' class="browser-default">
+                    <div class=" col s6">
+        <label for="plan_set">User Plan</label>
+<select name='plan_set' >
     <?php
     $count = "0";
     $statement_plan = $conn->prepare("SELECT * FROM plan ORDER BY id ASC");

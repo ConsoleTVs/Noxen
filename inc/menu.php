@@ -57,23 +57,23 @@
         <b>All functions require <i>activate.php</i> located in noxen folder <code>&lt;?php require 'path/to/activate.php' ?&gt;</code></b><br><br>
         <span>To edit the output HTML please edit the file: <i>activate.php</i> located in noxen folder</span><br><br>
         <h4>Show all posts</h4>
-        <p>To show all posts in a page, add the following code (please note that the post text will be max: 200 characters):
+        To show all posts in a page, add the following code (please note that the post text will be max: 200 characters):
         <br><br> 
         <b>Show all posts</b>    
         <pre>&lt;?php showPosts() ?&gt;</pre>
         
         <h4>Show a full post</h4>
-        <p>To show a full post in a page, add the following code (please note that it will need the post id, automatatic redirect with id when press 'Read More' a post from 'Show all posts' funcion above):
+        To show a full post in a page, add the following code (please note that it will need the post id, automatatic redirect with id when press 'Read More' a post from 'Show all posts' funcion above):
         <br><br> 
         <b>Show a full post</b>    
         <pre>&lt;?php showPost() ?&gt;</pre>
         
         <h4>Show the last post</h4>
-        <p>To show the full last post in a page, add the following code:
+        To show the full last post in a page, add the following code:
         <br><br> 
         <b>Show last post</b>    
         <pre>&lt;?php showLastPost() ?&gt;</pre>
         
-        </p>
+        
         <a href="#" class="waves-effect btn-flat modal-close right">Close</a>
     </div>

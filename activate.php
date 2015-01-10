@@ -27,9 +27,9 @@ try {
     $maintenance = $row['maintenance'];
 
     if($maintenance == 1){
-        /*--------------------------EDITABLE HTML--------------------------*/
-        die("<center><h1>WEBSITE UNDER MAINTENANCE</h1></center>");
-        /*--------------------------EDITABLE HTML--------------------------*/
+        header("Location: $maintenance_page");
+        die();
+        
     }
 
     if(isset($_SESSION['u_id'])){
